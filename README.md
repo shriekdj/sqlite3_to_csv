@@ -8,7 +8,7 @@ So This is an Simple Python Program To Export the SQLITE3 Database Table to an S
 ## Running Instructions
 - Fork & Clone the repo
 - Update the `.env` file
-- Run The Program by `python main.py`
+- Run The Program by `python ./src/main.py` from wherever your `.env` file is
 
 ## Package Details
 
