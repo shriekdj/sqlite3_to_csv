@@ -2,10 +2,13 @@
 import sqlite3
 import os
 import csv
+from dotenv import load_dotenv
 
-SQL_DB = "./sqlite_input.db"
-TABLE_TO_EXPORT = "my_table"
-OUTPUT_CSV = "csv_output.csv"
+load_dotenv()  # take environment variables from .env.
+
+SQL_DB = os.environ.get("SQL_DB")
+TABLE_TO_EXPORT = os.environ.get("TABLE_TO_EXPORT")
+OUTPUT_CSV = os.environ.get("OUTPUT_CSV")
 
 # Connect to database
 conn = sqlite3.connect(SQL_DB)
@@ -13,7 +16,7 @@ conn = sqlite3.connect(SQL_DB)
 cursor = conn.cursor()
 
 # Create Table into database
-cursor.execute('''CREATE TABLE IF NOT EXISTS my_table(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
+cursor.execute('''CREATE TABLE IF NOT EXISTS my_table(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
 						name TEXT NULL, age INTEGER NULL);''')
 
 # Export data into CSV file
