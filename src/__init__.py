@@ -22,18 +22,18 @@ cursor = conn.cursor()
 # Export data into CSV file
 def export_to_csv(sqlite3_file_path, csv_output_path, table_to_extract):
 	# Connect to database
-	conn = sqlite3.connect(SQL_DB)
+	conn = sqlite3.connect(sqlite3_file_path)
 
 	cursor = conn.cursor()
 
 	print("Exporting data into CSV............")
-	cursor.execute(f"SELECT * FROM {TABLE_TO_EXPORT}")
-	with open(OUTPUT_CSV, "w", newline='', encoding='utf-8') as csv_file:
+	cursor.execute(f"SELECT * FROM {table_to_extract}")
+	with open(csv_output_path, "w", newline='', encoding='utf-8') as csv_file:
 			csv_writer = csv.writer(csv_file, delimiter=",")
 			csv_writer.writerow([i[0] for i in cursor.description])
 			csv_writer.writerows(cursor)
 
-	dirpath = os.getcwd() + "/" + OUTPUT_CSV
+	dirpath = os.getcwd() + "/" + csv_output_path
 	print("Data exported Successfully into {}".format(dirpath))
 
 if __name__ == "__main__":
