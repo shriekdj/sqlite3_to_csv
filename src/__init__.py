@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
 
 SQL_DB = os.environ.get("SQL_DB")
-TABLE_TO_EXPORT = os.environ.get("TABLE_TO_EXPORT")
 OUTPUT_CSV = os.environ.get("OUTPUT_CSV")
+TABLE_TO_EXPORT = os.environ.get("TABLE_TO_EXPORT")
 
 # Connect to database
 conn = sqlite3.connect(SQL_DB)
@@ -20,7 +20,12 @@ cursor = conn.cursor()
 # 						name TEXT NULL, age INTEGER NULL);''')
 
 # Export data into CSV file
-def export_to_csv():
+def export_to_csv(sqlite3_file_path, csv_output_path, table_to_extract):
+	# Connect to database
+	conn = sqlite3.connect(SQL_DB)
+
+	cursor = conn.cursor()
+
 	print("Exporting data into CSV............")
 	cursor.execute(f"SELECT * FROM {TABLE_TO_EXPORT}")
 	with open(OUTPUT_CSV, "w", newline='', encoding='utf-8') as csv_file:
@@ -32,6 +37,6 @@ def export_to_csv():
 	print("Data exported Successfully into {}".format(dirpath))
 
 if __name__ == "__main__":
-	export_to_csv()
+	export_to_csv(SQL_DB, OUTPUT_CSV, TABLE_TO_EXPORT)
 	cursor.close()
 	conn.close()
