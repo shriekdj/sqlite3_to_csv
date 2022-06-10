@@ -15,9 +15,9 @@ conn = sqlite3.connect(SQL_DB)
 
 cursor = conn.cursor()
 
-# Create Table into database
-cursor.execute('''CREATE TABLE IF NOT EXISTS my_table(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
-						name TEXT NULL, age INTEGER NULL);''')
+# # Create Table into database
+# cursor.execute('''CREATE TABLE IF NOT EXISTS my_table(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
+# 						name TEXT NULL, age INTEGER NULL);''')
 
 # Export data into CSV file
 def export_to_csv():
